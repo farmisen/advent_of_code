@@ -33,7 +33,6 @@ fn day01_part01() -> u32 {
 mod tests {
     use crate::day01_part01;
 
-
     #[test]
     fn it_works() {
         assert_eq!(day01_part01(), 72718);
