@@ -12,10 +12,10 @@ const EMPTY_LINE: &str = "\n\n";
 const LINE_END: &str = "\n";
 
 fn main() {
-    println!("DAY 02:{:?}", day01());
+    println!("Day 01 Part 01:{:?}", day01_part02());
 }
 
-fn day01() -> u32 {
+fn day01_part02() -> u32 {
     sorted(
         fs::read_to_string("input.txt")
             .unwrap()
@@ -36,10 +36,11 @@ fn day01() -> u32 {
 
 #[cfg(test)]
 mod tests {
-    use crate::day01;
+    use crate::day01_part02;
+
 
     #[test]
     fn it_works() {
-        assert_eq!(day01(), 213089);
+        assert_eq!(day01_part02(), 213089);
     }
 }

@@ -10,10 +10,10 @@ const EMPTY_LINE: &str = "\n\n";
 const LINE_END: &str = "\n";
 
 fn main() {
-    println!("DAY 02:{:?}", day02());
+    println!("Day 01 Part 01:{:?}", day01_part01());
 }
 
-fn day02() -> u32 {
+fn day01_part01() -> u32 {
     fs::read_to_string("input.txt")
         .unwrap()
         .split(EMPTY_LINE)
@@ -31,10 +31,11 @@ fn day02() -> u32 {
 
 #[cfg(test)]
 mod tests {
-    use crate::day01;
+    use crate::day01_part01;
+
 
     #[test]
     fn it_works() {
-        assert_eq!(day02(), 72718);
+        assert_eq!(day01_part01(), 72718);
     }
 }
