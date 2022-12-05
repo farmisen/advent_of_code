@@ -4,8 +4,8 @@ use std::{fs, io::Result};
 
 use advent_of_code::{datapath, LINE_END};
 
-fn contains(r0: (u32, u32), r1: (u32, u32)) -> bool {
-    r0.0 <= r1.0 && r0.1 >= r1.1
+fn overlaps(r0: (u32, u32), r1: (u32, u32)) -> bool {
+    r0.0 >= r1.0 && r0.0 <= r1.1 || r1.0 >= r0.0 && r1.0 <= r0.1
 }
 
 fn main() -> Result<()> {
@@ -32,15 +32,18 @@ fn main() -> Result<()> {
                 .unwrap()
         })
         .map(|ranges: [(u32, u32); 2]| (ranges[0], ranges[1]))
-        .fold(0, |accu, (r0, r1)| {
-            if contains(r0, r1) || contains(r1, r0) {
-                accu + 1
-            } else {
-                accu
-            }
-        });
+        .fold(
+            0,
+            |accu, (r0, r1)| {
+                if overlaps(r0, r1) {
+                    accu + 1
+                } else {
+                    accu
+                }
+            },
+        );
 
-    // 441
-    println!("Day 04 Part 01:{:?}", res);
+    // 861
+    println!("Day 04 Part 02:{:?}", res);
     Ok(())
 }

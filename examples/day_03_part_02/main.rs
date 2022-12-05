@@ -6,7 +6,7 @@ use std::{fs, io::Result};
 use advent_of_code::{datapath, LINE_END};
 
 fn main() -> Result<()> {
-    let res = fs::read_to_string(datapath("day_03_part_02")?)?
+    let res = fs::read_to_string(datapath("day_03")?)?
         .split(LINE_END)
         .array_chunks::<3>()
         .map(|group| {

@@ -23,7 +23,7 @@ fn main() -> Result<()> {
         ("C Z", SCISSOR + DRAW),
     ]);
 
-    let res = fs::read_to_string(datapath("day_02_part_01")?)?
+    let res = fs::read_to_string(datapath("day_02")?)?
         .split(LINE_END)
         .fold(0, |accu, round| accu + scoring_system[round]);
     // 9651
