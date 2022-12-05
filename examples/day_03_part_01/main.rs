@@ -1,24 +1,11 @@
 use std::collections::HashSet;
-use std::fs;
+use std::{fs, io::Result};
 
+use advent_of_code::{datapath, LINE_END};
 use tuple::TupleElements;
 
-#[cfg(windows)]
-const LINE_END: &'static str = "\r\n";
-#[cfg(windows)]
-const EMPTY_LINE: &'static str = "\r\n\r\n";
-#[cfg(not(windows))]
-const EMPTY_LINE: &str = "\n\n";
-#[cfg(not(windows))]
-const LINE_END: &str = "\n";
-
-fn main() {
-    println!("Day 03 Part 01:{:?}", day03_part01());
-}
-
-fn day03_part01() -> u32 {
-    fs::read_to_string("input.txt")
-        .unwrap()
+fn main() -> Result<()> {
+    let res = fs::read_to_string(datapath("day_03_part_01")?)?
         .split(LINE_END)
         .fold(0, |accu, loadout| {
             let compartments: Vec<HashSet<u8>> = loadout
@@ -37,15 +24,9 @@ fn day03_part01() -> u32 {
                 65..=90 => common - 65 + 27,
                 _ => unreachable!(),
             } as u32
-        })
-}
+        });
 
-#[cfg(test)]
-mod tests {
-    use crate::day03_part01;
-
-    #[test]
-    fn it_works() {
-        assert_eq!(day03_part01(), 7917);
-    }
+    // 7917
+    println!("Day 03 Part 01:{:?}", res);
+    Ok(())
 }
