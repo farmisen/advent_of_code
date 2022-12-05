@@ -5,7 +5,7 @@ use advent_of_code::{datapath, LINE_END};
 use tuple::TupleElements;
 
 fn main() -> Result<()> {
-    let res = fs::read_to_string(datapath("day_03_part_01")?)?
+    let res = fs::read_to_string(datapath("day_03")?)?
         .split(LINE_END)
         .fold(0, |accu, loadout| {
             let compartments: Vec<HashSet<u8>> = loadout

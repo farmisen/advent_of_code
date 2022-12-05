@@ -5,7 +5,7 @@ use itertools::sorted;
 
 fn main() -> Result<()> {
     let res = sorted(
-        fs::read_to_string(datapath("day_01_part_01")?)?
+        fs::read_to_string(datapath("day_01")?)?
             .split(EMPTY_LINE)
             .map(|inventory| {
                 inventory.split(LINE_END).fold(0, |accu, calories| {

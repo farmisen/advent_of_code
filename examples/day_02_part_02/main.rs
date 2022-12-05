@@ -23,7 +23,7 @@ fn main() -> Result<()> {
         ("C Z", ROCK + WON),
     ]);
 
-    let res = fs::read_to_string(datapath("day_02_part_02")?)?
+    let res = fs::read_to_string(datapath("day_02")?)?
         .split(LINE_END)
         .fold(0, |accu, round| accu + scoring_system[round]);
 
