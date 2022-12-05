@@ -1,24 +1,12 @@
 #![feature(iter_array_chunks)]
 
 use std::collections::HashSet;
-use std::fs;
+use std::{fs, io::Result};
 
-#[cfg(windows)]
-const LINE_END: &'static str = "\r\n";
-#[cfg(windows)]
-const EMPTY_LINE: &'static str = "\r\n\r\n";
-#[cfg(not(windows))]
-const EMPTY_LINE: &str = "\n\n";
-#[cfg(not(windows))]
-const LINE_END: &str = "\n";
+use advent_of_code::{datapath, LINE_END};
 
-fn main() {
-    println!("Day 03 Part 01:{:?}", day03_part01());
-}
-
-fn day03_part01() -> u32 {
-    fs::read_to_string("input.txt")
-        .unwrap()
+fn main() -> Result<()> {
+    let res = fs::read_to_string(datapath("day_03_part_02")?)?
         .split(LINE_END)
         .array_chunks::<3>()
         .map(|group| {
@@ -40,15 +28,9 @@ fn day03_part01() -> u32 {
                 65..=90 => common - 65 + 27,
                 _ => unreachable!(),
             } as u32
-        })
-}
+        });
 
-#[cfg(test)]
-mod tests {
-    use crate::day03_part01;
-
-    #[test]
-    fn it_works() {
-        assert_eq!(day03_part01(), 2585);
-    }
+    // 2585
+    println!("Day 03 Part 02:{:?}", res);
+    Ok(())
 }

@@ -1,0 +1,9 @@
+[package]
+name = "advent_of_code"
+version = "0.0.22"
+edition = "2021"
+
+
+[dependencies]
+tuple = "0.5.1"
+itertools = "0.10.5"
