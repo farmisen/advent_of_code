@@ -1,0 +1,26 @@
+{
+  "name": "advent_of_code",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "clean": "rescript clean",
+    "build": "rescript build",
+    "watch": "rescript build -w",
+    "test": "onchange --initial '{rescript-tests,rescript-src}/*.js' -- pta 'rescript-tests/*.test.bs.js'"
+  },
+  "keywords": [
+    "ReScript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@dusty-phillips/rescript-zora": "^3.0.2",
+    "onchange": "^7.1.0",
+    "pta": "^1.2.0",
+    "rescript": "^10.0.1",
+    "zora": "^5.2.0"
+  },
+  "dependencies": {
+    "rescript-nodejs": "^14.3.1"
+  }
+}
