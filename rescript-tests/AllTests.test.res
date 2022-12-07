@@ -1,10 +1,8 @@
 open Zora
 
-zoraBlock("testing_works", t => {
-  t->equal(Day01Part01.run(), 72718, "Fail")
-})
-
-zoraBlock("testing_works", t => {
-  t->equal(Day01Part02.run(), 213089, "Fail")
+// TODO: Why test order matters?
+zoraBlock("all tests", t => {
+  t->equal(Day01.part02(), 213089, "Fail")
+  t->equal(Day01.part01(), 72718, "Fail")
 })
 

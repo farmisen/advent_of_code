@@ -12,7 +12,9 @@ let loadInput = (day: int) => {
 
 let sortNumbers = Js.Array.sortInPlaceWith((a, b) => a - b)
 
-let unwrapOrRaise = (exp, a) => switch a {
+let unwrapOrRaise = (exp, a) => {
+  switch a {
   | Some(thing) => thing
   | None => raise(exp)
   }
+}
