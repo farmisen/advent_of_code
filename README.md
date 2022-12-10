@@ -3,11 +3,16 @@
 
 ## Rust
 
-Todo
+```shell
+cd rust
+cargo test
+```
+
 
 ## ReScript
 
 ```shell
+cd rescript
 yarn install
 yarn test
 ```

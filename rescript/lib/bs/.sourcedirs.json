@@ -1,0 +1,1 @@
+{ "dirs" : [ "tests" , "src" ] , "pkgs" : [ [ "@dusty-phillips/rescript-zora" , "/Users/farmisen/Projects/fa/advent_of_code/rescript/node_modules/@dusty-phillips/rescript-zora" ] , [ "rescript-nodejs" , "/Users/farmisen/Projects/fa/advent_of_code/rescript/node_modules/rescript-nodejs" ] ] , "generated" : [] }
