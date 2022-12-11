@@ -18,3 +18,6 @@ let unwrapOrRaise = (exp, a) => {
   | None => raise(exp)
   }
 }
+
+
+let loadLines = (day: int) => day |> loadInput |> Js.String.split(Os.eol)
