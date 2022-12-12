@@ -45,14 +45,6 @@ where
         })
 }
 
-fn priority(c: &u8) -> u32 {
-    (match c {
-        97..=122 => c - 97 + 1,
-        65..=90 => c - 65 + 27,
-        _ => unreachable!(),
-    }) as u32
-}
-
 fn contains(r0: (u32, u32), r1: (u32, u32)) -> bool {
     r0.0 <= r1.0 && r0.1 >= r1.1
 }

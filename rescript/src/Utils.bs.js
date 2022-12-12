@@ -40,7 +40,12 @@ function loadLines(day) {
   return Js_string.split(Os.EOL, loadInput(day));
 }
 
-function toChunks(size, array) {
+function pushTo(arr, item) {
+  Js_array.push(item, arr);
+  return arr;
+}
+
+function toChunks(size, arr) {
   return Js_array.reducei((function (accumulator, item, index) {
                 var chunk;
                 if (Caml_int32.mod_(index, size) === 0) {
@@ -49,10 +54,8 @@ function toChunks(size, array) {
                   var __x = accumulator.pop();
                   chunk = Belt_Option.getWithDefault(__x === undefined ? undefined : Caml_option.some(__x), []);
                 }
-                Js_array.push(item, chunk);
-                Js_array.push(chunk, accumulator);
-                return accumulator;
-              }), [], array);
+                return pushTo(accumulator, pushTo(chunk, item));
+              }), [], arr);
 }
 
 export {
@@ -62,6 +65,7 @@ export {
   unwrapOrRaise ,
   first ,
   loadLines ,
+  pushTo ,
   toChunks ,
 }
 /* fs Not a pure module */

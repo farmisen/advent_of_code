@@ -1,4 +1,5 @@
 open NodeJs
+open Js.Array
 
 @send external padStart: (string, int, string) => string = "padStart"
 @send external toString: int => string = "toString"
@@ -10,7 +11,7 @@ let loadInput = (day: int) => {
   Fs.readFileSyncWith(path, Fs.readFileOptions(~encoding="UTF-8", ()))->Buffer.toString
 }
 
-let sortNumbers = Js.Array.sortInPlaceWith((a, b) => a - b)
+let sortNumbers = sortInPlaceWith((a, b) => a - b)
 
 let unwrapOrRaise = (exp, a) => {
   switch a {
@@ -23,16 +24,18 @@ let first = array => array[0]
 
 let loadLines = (day: int) => day |> loadInput |> Js.String.split(Os.eol)
 
-let toChunks = (size, array) => {
-  array |> Js.Array.reducei((accumulator, item, index) => {
+let pushTo = (arr: array<'a>, item: 'a): array<'a> => {
+  push(item, arr)->ignore
+  arr
+}
+
+let toChunks = (size, arr) => {
+  arr |> reducei((accumulator, item, index) => {
     let chunk = if mod(index, size) === 0 {
       []
     } else {
-      accumulator |> Js.Array.pop(_) |> Belt.Option.getWithDefault(_, [])
+      pop(accumulator) |> Belt.Option.getWithDefault(_, [])
     }
-
-    Js.Array.push(item, chunk)->ignore
-    Js.Array.push(chunk, accumulator)->ignore
-    accumulator
+    item |> pushTo(chunk) |> pushTo(accumulator)
   }, [])
 }

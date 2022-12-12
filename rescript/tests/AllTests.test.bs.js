@@ -4,6 +4,7 @@ import * as Zora from "zora";
 import * as Day01 from "../src/Day01.bs.js";
 import * as Day02 from "../src/Day02.bs.js";
 import * as Day03 from "../src/Day03.bs.js";
+import * as Day04 from "../src/Day04.bs.js";
 
 Zora.test("all tests", (function (t) {
         t.equal(Day01.part02(undefined), 213089, "Fail");
@@ -12,6 +13,8 @@ Zora.test("all tests", (function (t) {
         t.equal(Day02.part02(undefined), 10560, "Fail");
         t.equal(Day03.part01(undefined), 7917, "Fail");
         t.equal(Day03.part02(undefined), 2585, "Fail");
+        t.equal(Day04.part01(undefined), 441, "Fail");
+        t.equal(Day04.part02(undefined), 861, "Fail");
       }));
 
 export {

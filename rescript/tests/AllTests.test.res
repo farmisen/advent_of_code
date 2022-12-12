@@ -8,4 +8,6 @@ zoraBlock("all tests", t => {
   t->equal(Day02.part02(), 10560, "Fail")
   t->equal(Day03.part01(), 7917, "Fail")
   t->equal(Day03.part02(), 2585, "Fail")
+  t->equal(Day04.part01(), 441, "Fail")
+  t->equal(Day04.part02(), 861, "Fail")
 })
