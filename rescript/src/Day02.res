@@ -1,29 +1,5 @@
-open NodeJs
 open Js.Array
-open Js.String
 open Utils
-
-// let reduceLine = line =>
-//   line
-//   |> split(Os.eol)
-//   |> map(Belt.Int.fromString)
-//   |> map(unwrapOrRaise(WentSouth))
-//   |> reduce(\"+", 0)
-
-// let sortedCalCounts =
-//   loadInput(2)
-//   |> Js.String.concat(Os.eol ++ Os.eol)
-//   |> split(Os.eol ++ Os.eol)
-//   |> filter(s => s != "" && s != Os.eol)
-//   |> map(reduceLine)
-//   |> sortNumbers
-
-// rock    A X 1
-// paper  B Y 2
-// scissor C Z 3
-// lost: 0
-// draw: 3
-// win: 6
 
 let rock = 1
 let paper = 2

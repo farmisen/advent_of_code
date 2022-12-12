@@ -4,6 +4,9 @@ import * as Fs from "fs";
 import * as Os from "os";
 import * as Js_array from "rescript/lib/es6/js_array.js";
 import * as Js_string from "rescript/lib/es6/js_string.js";
+import * as Caml_array from "rescript/lib/es6/caml_array.js";
+import * as Caml_int32 from "rescript/lib/es6/caml_int32.js";
+import * as Belt_Option from "rescript/lib/es6/belt_Option.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Caml_exceptions from "rescript/lib/es6/caml_exceptions.js";
 
@@ -29,8 +32,27 @@ function unwrapOrRaise(exp, a) {
   throw exp;
 }
 
+function first(array) {
+  return Caml_array.get(array, 0);
+}
+
 function loadLines(day) {
   return Js_string.split(Os.EOL, loadInput(day));
+}
+
+function toChunks(size, array) {
+  return Js_array.reducei((function (accumulator, item, index) {
+                var chunk;
+                if (Caml_int32.mod_(index, size) === 0) {
+                  chunk = [];
+                } else {
+                  var __x = accumulator.pop();
+                  chunk = Belt_Option.getWithDefault(__x === undefined ? undefined : Caml_option.some(__x), []);
+                }
+                Js_array.push(item, chunk);
+                Js_array.push(chunk, accumulator);
+                return accumulator;
+              }), [], array);
 }
 
 export {
@@ -38,6 +60,8 @@ export {
   loadInput ,
   sortNumbers ,
   unwrapOrRaise ,
+  first ,
   loadLines ,
+  toChunks ,
 }
 /* fs Not a pure module */
