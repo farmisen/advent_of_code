@@ -10,4 +10,6 @@ zoraBlock("all tests", t => {
   t->equal(Day03.part02(), 2585, "Fail")
   t->equal(Day04.part01(), 441, "Fail")
   t->equal(Day04.part02(), 861, "Fail")
+  t->equal(Day05.part01(), ["H", "B", "T", "M", "T", "B", "S", "D", "C"], "Fail")
+  t->equal(Day05.part02(), ["P", "Q", "T", "J", "R", "S", "H", "W", "S"], "Fail")
 })

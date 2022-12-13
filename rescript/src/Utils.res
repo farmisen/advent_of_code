@@ -20,7 +20,11 @@ let unwrapOrRaise = (exp, a) => {
   }
 }
 
-let first = array => array[0]
+let first = (arr: array<'a>): 'a =>
+  switch length(arr) {
+  | 1 => arr[0]
+  | _ => raise(WentSouth)
+  }
 
 let loadLines = (day: int) => day |> loadInput |> Js.String.split(Os.eol)
 
@@ -28,6 +32,20 @@ let pushTo = (arr: array<'a>, item: 'a): array<'a> => {
   push(item, arr)->ignore
   arr
 }
+
+let unshiftArray = (arr: array<'a>, item: 'a): array<'a> => {
+  unshift(item, arr)->ignore
+  arr
+}
+let reverseArray = (arr: array<'a>) : array<'a> => {
+  reverseInPlace(arr)->ignore
+  arr
+}
+
+let sliceArrayAt = (idx: int, arr: array<'a>) : (array<'a>, array<'a>) => {
+  (slice(~start=0, ~end_=idx, arr), sliceFrom(idx, arr))
+}
+
 
 let toChunks = (size, arr) => {
   arr |> reducei((accumulator, item, index) => {
@@ -38,4 +56,12 @@ let toChunks = (size, arr) => {
     }
     item |> pushTo(chunk) |> pushTo(accumulator)
   }, [])
+}
+
+let arrayOfSize = (size: int, valueAt: (int) => 'a) : array<'a> => {
+  let arr = []
+  for idx in 0 to size-1 {
+    push(valueAt(idx), arr)->ignore    
+  }
+  arr
 }

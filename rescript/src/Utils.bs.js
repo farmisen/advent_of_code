@@ -2,6 +2,7 @@
 
 import * as Fs from "fs";
 import * as Os from "os";
+import * as Curry from "rescript/lib/es6/curry.js";
 import * as Js_array from "rescript/lib/es6/js_array.js";
 import * as Js_string from "rescript/lib/es6/js_string.js";
 import * as Caml_array from "rescript/lib/es6/caml_array.js";
@@ -32,8 +33,15 @@ function unwrapOrRaise(exp, a) {
   throw exp;
 }
 
-function first(array) {
-  return Caml_array.get(array, 0);
+function first(arr) {
+  var match = arr.length;
+  if (match !== 1) {
+    throw {
+          RE_EXN_ID: WentSouth,
+          Error: new Error()
+        };
+  }
+  return Caml_array.get(arr, 0);
 }
 
 function loadLines(day) {
@@ -43,6 +51,23 @@ function loadLines(day) {
 function pushTo(arr, item) {
   Js_array.push(item, arr);
   return arr;
+}
+
+function unshiftArray(arr, item) {
+  Js_array.unshift(item, arr);
+  return arr;
+}
+
+function reverseArray(arr) {
+  arr.reverse();
+  return arr;
+}
+
+function sliceArrayAt(idx, arr) {
+  return [
+          Js_array.slice(0, idx, arr),
+          Js_array.sliceFrom(idx, arr)
+        ];
 }
 
 function toChunks(size, arr) {
@@ -58,6 +83,14 @@ function toChunks(size, arr) {
               }), [], arr);
 }
 
+function arrayOfSize(size, valueAt) {
+  var arr = [];
+  for(var idx = 0; idx < size; ++idx){
+    Js_array.push(Curry._1(valueAt, idx), arr);
+  }
+  return arr;
+}
+
 export {
   WentSouth ,
   loadInput ,
@@ -66,6 +99,10 @@ export {
   first ,
   loadLines ,
   pushTo ,
+  unshiftArray ,
+  reverseArray ,
+  sliceArrayAt ,
   toChunks ,
+  arrayOfSize ,
 }
 /* fs Not a pure module */
