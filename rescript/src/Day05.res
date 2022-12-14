@@ -4,8 +4,8 @@ open Utils
 type move = {from: int, to: int, count: int}
 type context = {stacks: array<array<string>>, moves: array<move>}
 
-let loadContext = (): context => {
-  loadLines(5) |> reduce((accu: context, line: string) => {
+let loadContext = (input: array<string>): context => {
+  input |> reduce((accu: context, line: string) => {
     switch line {
     // handle stacks initial state line
     | stacksLine if stacksLine |> Js.String.trim |> Js.String.startsWith("[") =>
@@ -33,8 +33,8 @@ let loadContext = (): context => {
   }, {stacks: arrayOfSize(9, _ => []), moves: []})
 }
 
-let part01 = () => {
-  let {stacks, moves} = loadContext()
+let part01 = (input) => {
+  let {stacks, moves} = loadContext(input)
   moves |> forEach(({from, to, count}) => {
     let (leftOver, chunk) = stacks[from - 1] |> sliceArrayAt(length(stacks[from - 1]) - count)
     stacks[from - 1] = leftOver
@@ -44,8 +44,8 @@ let part01 = () => {
   stacks |> map(stack => stack |> pop |> Belt.Option.getExn)
 }
 
-let part02 = () => {
-  let {stacks, moves} = loadContext()
+let part02 = (input) => {
+  let {stacks, moves} = loadContext(input)
   moves |> forEach(({from, to, count}) => {
     let (leftOver, chunk) = stacks[from - 1] |> sliceArrayAt(length(stacks[from - 1]) - count)
     stacks[from - 1] = leftOver

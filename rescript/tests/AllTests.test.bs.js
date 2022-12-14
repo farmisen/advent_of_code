@@ -6,17 +6,19 @@ import * as Day02 from "../src/Day02.bs.js";
 import * as Day03 from "../src/Day03.bs.js";
 import * as Day04 from "../src/Day04.bs.js";
 import * as Day05 from "../src/Day05.bs.js";
+import * as Day06 from "../src/Day06.bs.js";
+import * as Utils from "../src/Utils.bs.js";
 
 Zora.test("all tests", (function (t) {
-        t.equal(Day01.part02(undefined), 213089, "Fail");
-        t.equal(Day01.part01(undefined), 72718, "Fail");
-        t.equal(Day02.part01(undefined), 9651, "Fail");
-        t.equal(Day02.part02(undefined), 10560, "Fail");
-        t.equal(Day03.part01(undefined), 7917, "Fail");
-        t.equal(Day03.part02(undefined), 2585, "Fail");
-        t.equal(Day04.part01(undefined), 441, "Fail");
-        t.equal(Day04.part02(undefined), 861, "Fail");
-        t.equal(Day05.part01(undefined), [
+        t.equal(Day01.part02(Utils.loadInput(1)), 213089, "Fail");
+        t.equal(Day01.part01(Utils.loadInput(1)), 72718, "Fail");
+        t.equal(Day02.part01(Utils.loadLines(2)), 9651, "Fail");
+        t.equal(Day02.part02(Utils.loadLines(2)), 10560, "Fail");
+        t.equal(Day03.part01(Utils.loadLines(3)), 7917, "Fail");
+        t.equal(Day03.part02(Utils.loadLines(3)), 2585, "Fail");
+        t.equal(Day04.part01(Utils.loadLines(4)), 441, "Fail");
+        t.equal(Day04.part02(Utils.loadLines(4)), 861, "Fail");
+        t.equal(Day05.part01(Utils.loadLines(5)), [
               "H",
               "B",
               "T",
@@ -27,7 +29,7 @@ Zora.test("all tests", (function (t) {
               "D",
               "C"
             ], "Fail");
-        t.equal(Day05.part02(undefined), [
+        t.equal(Day05.part02(Utils.loadLines(5)), [
               "P",
               "Q",
               "T",
@@ -38,6 +40,17 @@ Zora.test("all tests", (function (t) {
               "W",
               "S"
             ], "Fail");
+        t.equal(Day06.part01("bvwbjplbgvbhsrlpgdmjqwftvncz"), 5, "Fail");
+        t.equal(Day06.part01("nppdvjthqldpwncqszvftbrmjlhg"), 6, "Fail");
+        t.equal(Day06.part01("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 10, "Fail");
+        t.equal(Day06.part01("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 11, "Fail");
+        t.equal(Day06.part01(Utils.loadInput(6)), 1623, "Fail");
+        t.equal(Day06.part02("mjqjpqmgbljsphdztnvjfqwrcgsmlb"), 19, "Fail");
+        t.equal(Day06.part02("bvwbjplbgvbhsrlpgdmjqwftvncz"), 23, "Fail");
+        t.equal(Day06.part02("nppdvjthqldpwncqszvftbrmjlhg"), 23, "Fail");
+        t.equal(Day06.part02("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 29, "Fail");
+        t.equal(Day06.part02("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 26, "Fail");
+        t.equal(Day06.part02(Utils.loadInput(6)), 1623, "Fail");
       }));
 
 export {

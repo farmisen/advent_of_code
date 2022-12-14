@@ -9,7 +9,7 @@ import * as Caml_array from "rescript/lib/es6/caml_array.js";
 import * as Belt_Option from "rescript/lib/es6/belt_Option.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 
-function loadContext(param) {
+function loadContext(input) {
   return Js_array.reduce((function (accu, line) {
                 if (Js_string.startsWith("[", line.trim())) {
                   Belt_Range.forEach(0, 8, (function (idx) {
@@ -65,11 +65,11 @@ function loadContext(param) {
                       return [];
                     })),
               moves: []
-            }, Utils.loadLines(5));
+            }, input);
 }
 
-function part01(param) {
-  var match = loadContext(undefined);
+function part01(input) {
+  var match = loadContext(input);
   var stacks = match.stacks;
   Js_array.forEach((function (param) {
           var to = param.to;
@@ -83,8 +83,8 @@ function part01(param) {
               }), stacks);
 }
 
-function part02(param) {
-  var match = loadContext(undefined);
+function part02(input) {
+  var match = loadContext(input);
   var stacks = match.stacks;
   Js_array.forEach((function (param) {
           var to = param.to;

@@ -18,24 +18,26 @@ function reduceLine(line) {
                   }), Js_array.map(Belt_Int.fromString, Js_string.split(Os.EOL, line))));
 }
 
-var sortedCalCounts = Utils.sortNumbers(Js_array.map(reduceLine, Js_array.filter((function (s) {
-                if (s !== "") {
-                  return s !== Os.EOL;
-                } else {
-                  return false;
-                }
-              }), Js_string.split(Os.EOL + Os.EOL, Js_string.concat(Os.EOL + Os.EOL, Utils.loadInput(1))))));
-
-function part01(param) {
-  return Utils.unwrapOrRaise({
-              RE_EXN_ID: Utils.WentSouth
-            }, Caml_option.undefined_to_opt(sortedCalCounts.pop()));
+function sortedCalCounts(input) {
+  return Utils.sortNumbers(Js_array.map(reduceLine, Js_array.filter((function (s) {
+                        if (s !== "") {
+                          return s !== Os.EOL;
+                        } else {
+                          return false;
+                        }
+                      }), Js_string.split(Os.EOL + Os.EOL, Js_string.concat(Os.EOL + Os.EOL, input)))));
 }
 
-function part02(param) {
+function part01(input) {
+  return Utils.unwrapOrRaise({
+              RE_EXN_ID: Utils.WentSouth
+            }, Caml_option.undefined_to_opt(sortedCalCounts(input).pop()));
+}
+
+function part02(input) {
   return Js_array.reduce((function (prim0, prim1) {
                 return prim0 + prim1 | 0;
-              }), 0, Js_array.sliceFrom(-3, sortedCalCounts));
+              }), 0, Js_array.sliceFrom(-3, sortedCalCounts(input)));
 }
 
 export {
@@ -44,4 +46,4 @@ export {
   part01 ,
   part02 ,
 }
-/* sortedCalCounts Not a pure module */
+/* os Not a pure module */

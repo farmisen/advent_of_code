@@ -31,15 +31,15 @@ function priority(c) {
       };
 }
 
-function part01(param) {
+function part01(input) {
   return Js_array.reduce((function (prim0, prim1) {
                 return prim0 + prim1 | 0;
               }), 0, Js_array.map((function (compartments) {
                     return priority(Utils.first(Belt_SetString.toArray(Belt_SetString.intersect(Caml_array.get(compartments, 0), Caml_array.get(compartments, 1)))));
-                  }), Js_array.map(toCompartments, Utils.loadLines(3))));
+                  }), Js_array.map(toCompartments, input)));
 }
 
-function part02(param) {
+function part02(input) {
   return Js_array.reduce((function (prim0, prim1) {
                 return prim0 + prim1 | 0;
               }), 0, Js_array.map((function (chunk) {
@@ -57,7 +57,7 @@ function part02(param) {
                         return Js_array.map((function (rucksack) {
                                       return Belt_SetString.fromArray(Js_string.split("", rucksack));
                                     }), chunk);
-                      }), Utils.toChunks(3, Utils.loadLines(3)))));
+                      }), Utils.toChunks(3, input))));
 }
 
 export {

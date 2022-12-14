@@ -1,5 +1,4 @@
 open Js.Array
-open Utils
 
 let rock = 1
 let paper = 2
@@ -8,7 +7,7 @@ let lost = 0
 let draw = 3
 let won = 6
 
-let part01 = () => {
+let part01 = (input: array<string>) => {
   // A: rock
   // B: paper
   // C: scissor
@@ -28,10 +27,10 @@ let part01 = () => {
     ("C Z", scissor + draw),
   ])
 
-  loadLines(2) |> reduce((accu, val) => accu + Js.Dict.unsafeGet(scoring, val), 0)
+  input |> reduce((accu, val) => accu + Js.Dict.unsafeGet(scoring, val), 0)
 }
 
-let part02 = () => {
+let part02 = (input: array<string>) => {
   // A: rock
   // B: paper
   // C: scissor
@@ -51,5 +50,5 @@ let part02 = () => {
     ("C Z", rock + won),
   ])
 
-  loadLines(2) |> reduce((accu, val) => accu + Js.Dict.unsafeGet(scoring, val), 0)
+  input |> reduce((accu, val) => accu + Js.Dict.unsafeGet(scoring, val), 0)
 }

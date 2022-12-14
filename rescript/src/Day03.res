@@ -19,16 +19,16 @@ let priority = c =>
   | _ => raise(WentSouth)
   }
 
-let part01 = () =>
-  loadLines(3)
+let part01 = (input: array<string>) =>
+  input
   |> map(toCompartments)
   |> map(compartments => {
     compartments[0]->intersect(compartments[1]) |> Belt.Set.String.toArray(_) |> first |> priority
   })
   |> Js.Array.reduce(\"+", 0)
 
-let part02 = () => {
-  loadLines(3)
+let part02 = (input: array<string>) => {
+  input
   |> toChunks(3)
   |> map(chunk =>
     chunk |> map(rucksack => rucksack |> Js.String.split("") |> Belt.Set.String.fromArray(_))

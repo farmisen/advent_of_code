@@ -1,5 +1,4 @@
 open Js.Array
-open Utils
 
 let includeOther = (r0, r1) => r0[0] <= r1[0] && r0[1] >= r1[1]
 let includeAny = (r0, r1) => includeOther(r0, r1) || includeOther(r1, r0)
@@ -10,8 +9,8 @@ let toRanges = line =>
   |> Js.String.split(",")
   |> map(range => range |> Js.String.split("-") |> map(str => Belt.Int.fromString(str)))
 
-let part01 = () => {
-  loadLines(4)
+let part01 = (input: array<string>) => {
+  input
   |> map(toRanges)
   |> filter(ranges =>
     switch ranges {
@@ -22,8 +21,8 @@ let part01 = () => {
   |> length
 }
 
-let part02 = () => {
-  loadLines(4)
+let part02 = (input: array<string>) => {
+  input
   |> map(toRanges)
   |> filter(ranges =>
     switch ranges {
