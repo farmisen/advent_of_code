@@ -35,13 +35,24 @@ function unwrapOrRaise(exp, a) {
 
 function first(arr) {
   var match = arr.length;
-  if (match !== 1) {
-    throw {
-          RE_EXN_ID: WentSouth,
-          Error: new Error()
-        };
+  if (match !== 0) {
+    return Caml_array.get(arr, 0);
   }
-  return Caml_array.get(arr, 0);
+  throw {
+        RE_EXN_ID: WentSouth,
+        Error: new Error()
+      };
+}
+
+function last(arr) {
+  var match = arr.length;
+  if (match !== 0) {
+    return Caml_array.get(arr, arr.length);
+  }
+  throw {
+        RE_EXN_ID: WentSouth,
+        Error: new Error()
+      };
 }
 
 function loadLines(day) {
@@ -60,6 +71,11 @@ function unshiftArray(arr, item) {
 
 function reverseArray(arr) {
   arr.reverse();
+  return arr;
+}
+
+function sortArrayWith($$with, arr) {
+  Js_array.sortInPlaceWith($$with, arr);
   return arr;
 }
 
@@ -97,10 +113,12 @@ export {
   sortNumbers ,
   unwrapOrRaise ,
   first ,
+  last ,
   loadLines ,
   pushTo ,
   unshiftArray ,
   reverseArray ,
+  sortArrayWith ,
   sliceArrayAt ,
   toChunks ,
   arrayOfSize ,

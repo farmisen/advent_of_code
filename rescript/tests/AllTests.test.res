@@ -27,5 +27,33 @@ zoraBlock("all tests", t => {
   t->equal(Day06.part02("nppdvjthqldpwncqszvftbrmjlhg"), 23, "Fail")
   t->equal(Day06.part02("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 29, "Fail")
   t->equal(Day06.part02("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 26, "Fail")
-  t->equal(Day06.part02(Utils.loadInput(6)), 1623, "Fail")
+  t->equal(Day06.part02(Utils.loadInput(6)), 3774, "Fail")
+
+  let fs = `$ cd /
+$ ls
+dir a
+14848514 b.txt
+8504156 c.dat
+dir d
+$ cd a
+$ ls
+dir e
+29116 f
+2557 g
+62596 h.lst
+$ cd e
+$ ls
+584 i
+$ cd ..
+$ cd ..
+$ cd d
+$ ls
+4060174 j
+8033020 d.log
+5626152 d.ext
+7214296 k`
+  t->equal(Day07.part01(fs), 95437, "Fail")
+  t->equal(Day07.part01(Utils.loadInput(7)), 1749646, "Fail")
+  // t->equal(Day07.part02(fs), 24933642, "Fail")
+  t->equal(Day07.part02(Utils.loadInput(7)), 17496146, "Fail")
 })

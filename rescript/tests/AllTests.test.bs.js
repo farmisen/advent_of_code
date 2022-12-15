@@ -7,6 +7,7 @@ import * as Day03 from "../src/Day03.bs.js";
 import * as Day04 from "../src/Day04.bs.js";
 import * as Day05 from "../src/Day05.bs.js";
 import * as Day06 from "../src/Day06.bs.js";
+import * as Day07 from "../src/Day07.bs.js";
 import * as Utils from "../src/Utils.bs.js";
 
 Zora.test("all tests", (function (t) {
@@ -50,7 +51,10 @@ Zora.test("all tests", (function (t) {
         t.equal(Day06.part02("nppdvjthqldpwncqszvftbrmjlhg"), 23, "Fail");
         t.equal(Day06.part02("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 29, "Fail");
         t.equal(Day06.part02("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 26, "Fail");
-        t.equal(Day06.part02(Utils.loadInput(6)), 1623, "Fail");
+        t.equal(Day06.part02(Utils.loadInput(6)), 3774, "Fail");
+        t.equal(Day07.part01("$ cd /\n$ ls\ndir a\n14848514 b.txt\n8504156 c.dat\ndir d\n$ cd a\n$ ls\ndir e\n29116 f\n2557 g\n62596 h.lst\n$ cd e\n$ ls\n584 i\n$ cd ..\n$ cd ..\n$ cd d\n$ ls\n4060174 j\n8033020 d.log\n5626152 d.ext\n7214296 k"), 95437, "Fail");
+        t.equal(Day07.part01(Utils.loadInput(7)), 1749646, "Fail");
+        t.equal(Day07.part02(Utils.loadInput(7)), 17496146, "Fail");
       }));
 
 export {
