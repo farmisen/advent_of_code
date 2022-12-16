@@ -13,6 +13,19 @@ let loadInput = (day: int) => {
 
 let sortNumbers = sortInPlaceWith((a, b) => a - b)
 
+let mapRange = (from: int, to: int, apply: int => 'a): array<'a> => {
+  switch (from, to) {
+  | (_, _) if to < from => []
+  | _ => {
+      let ary: array<'a> = []
+      Belt.Range.forEach(from, to, idx => {
+        push(apply(idx), ary)->ignore
+      })
+      ary
+    }
+  }
+}
+
 let unwrapOrRaise = (exp, a) => {
   switch a {
   | Some(thing) => thing

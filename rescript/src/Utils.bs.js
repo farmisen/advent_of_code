@@ -5,6 +5,7 @@ import * as Os from "os";
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as Js_array from "rescript/lib/es6/js_array.js";
 import * as Js_string from "rescript/lib/es6/js_string.js";
+import * as Belt_Range from "rescript/lib/es6/belt_Range.js";
 import * as Caml_array from "rescript/lib/es6/caml_array.js";
 import * as Caml_int32 from "rescript/lib/es6/caml_int32.js";
 import * as Belt_Option from "rescript/lib/es6/belt_Option.js";
@@ -24,6 +25,17 @@ function sortNumbers(param) {
   return Js_array.sortInPlaceWith((function (a, b) {
                 return a - b | 0;
               }), param);
+}
+
+function mapRange(from, to, apply) {
+  if (to < from) {
+    return [];
+  }
+  var ary = [];
+  Belt_Range.forEach(from, to, (function (idx) {
+          Js_array.push(Curry._1(apply, idx), ary);
+        }));
+  return ary;
 }
 
 function unwrapOrRaise(exp, a) {
@@ -111,6 +123,7 @@ export {
   WentSouth ,
   loadInput ,
   sortNumbers ,
+  mapRange ,
   unwrapOrRaise ,
   first ,
   last ,

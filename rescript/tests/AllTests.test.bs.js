@@ -8,6 +8,7 @@ import * as Day04 from "../src/Day04.bs.js";
 import * as Day05 from "../src/Day05.bs.js";
 import * as Day06 from "../src/Day06.bs.js";
 import * as Day07 from "../src/Day07.bs.js";
+import * as Day08 from "../src/Day08.bs.js";
 import * as Utils from "../src/Utils.bs.js";
 
 Zora.test("all tests", (function (t) {
@@ -52,9 +53,30 @@ Zora.test("all tests", (function (t) {
         t.equal(Day06.part02("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 29, "Fail");
         t.equal(Day06.part02("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 26, "Fail");
         t.equal(Day06.part02(Utils.loadInput(6)), 3774, "Fail");
-        t.equal(Day07.part01("$ cd /\n$ ls\ndir a\n14848514 b.txt\n8504156 c.dat\ndir d\n$ cd a\n$ ls\ndir e\n29116 f\n2557 g\n62596 h.lst\n$ cd e\n$ ls\n584 i\n$ cd ..\n$ cd ..\n$ cd d\n$ ls\n4060174 j\n8033020 d.log\n5626152 d.ext\n7214296 k"), 95437, "Fail");
+        var fs = "$ cd /\n$ ls\ndir a\n14848514 b.txt\n8504156 c.dat\ndir d\n$ cd a\n$ ls\ndir e\n29116 f\n2557 g\n62596 h.lst\n$ cd e\n$ ls\n584 i\n$ cd ..\n$ cd ..\n$ cd d\n$ ls\n4060174 j\n8033020 d.log\n5626152 d.ext\n7214296 k";
+        t.equal(Day07.part01(fs), 95437, "Fail");
         t.equal(Day07.part01(Utils.loadInput(7)), 1749646, "Fail");
-        t.equal(Day07.part02(Utils.loadInput(7)), 17496146, "Fail");
+        t.equal(Day07.part02(fs), 24933642, "Fail");
+        t.equal(Day07.part02(Utils.loadInput(7)), 1498966, "Fail");
+        t.equal(Day08.part01("30373\n25512\n65332\n33549\n35390"), 21, "Fail");
+        t.equal(Day08.part01(Utils.loadInput(8)), 1703, "Fail");
+        t.equal(Day08.part02("30373\n25512\n65332\n33549\n35390"), 8, "Fail");
+        t.equal(Day08.part02(Utils.loadInput(8)), 496650, "Fail");
+        t.equal(Day08.countUntilBiggerOrEqual(3, [
+                  2,
+                  3,
+                  3
+                ]), 2, "Fail");
+        t.equal(Day08.countUntilBiggerOrEqual(3, [
+                  2,
+                  1,
+                  2
+                ]), 3, "Fail");
+        t.equal(Day08.countUntilBiggerOrEqual(3, [
+                  5,
+                  1,
+                  2
+                ]), 1, "Fail");
       }));
 
 export {
