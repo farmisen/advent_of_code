@@ -9,6 +9,7 @@ import * as Day05 from "../src/Day05.bs.js";
 import * as Day06 from "../src/Day06.bs.js";
 import * as Day07 from "../src/Day07.bs.js";
 import * as Day08 from "../src/Day08.bs.js";
+import * as Day09 from "../src/Day09.bs.js";
 import * as Utils from "../src/Utils.bs.js";
 
 Zora.test("all tests", (function (t) {
@@ -77,6 +78,9 @@ Zora.test("all tests", (function (t) {
                   1,
                   2
                 ]), 1, "Fail");
+        t.equal(Day09.part01("R 4\nU 4\nL 3\nD 1\nR 4\nD 1\nL 5\nR 2"), 13, "Fail");
+        t.equal(Day09.part01(Utils.loadInput(9)), 5513, "Fail");
+        t.equal(Day09.part02(Utils.loadInput(9)), 2427, "Fail");
       }));
 
 export {

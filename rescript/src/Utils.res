@@ -26,6 +26,10 @@ let mapRange = (from: int, to: int, apply: int => 'a): array<'a> => {
   }
 }
 
+
+
+
+
 let unwrapOrRaise = (exp, a) => {
   switch a {
   | Some(thing) => thing
@@ -40,11 +44,12 @@ let first = (arr: array<'a>): 'a => {
   }
 }
 
-let last = (arr: array<'a>): 'a =>
+let last = (arr: array<'a>): 'a => {
   switch length(arr) {
   | 0 => raise(WentSouth)
-  | _ => arr[length(arr)]
+  | _ => arr[length(arr)-1]
   }
+}
 
 let loadLines = (day: int) => day |> loadInput |> Js.String.split(Os.eol)
 

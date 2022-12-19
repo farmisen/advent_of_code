@@ -99,4 +99,19 @@ $ ls
   t->equal(Day08.countUntilBiggerOrEqual(3, [2, 3, 3]), 2, "Fail")
   t->equal(Day08.countUntilBiggerOrEqual(3, [2, 1, 2]), 3, "Fail")
   t->equal(Day08.countUntilBiggerOrEqual(3, [5, 1, 2]), 1, "Fail")
+
+  //
+  // Day 09
+  //
+  let moves = `R 4
+U 4
+L 3
+D 1
+R 4
+D 1
+L 5
+R 2`
+  t->equal(Day09.part01(moves), 13, "Fail")
+  t->equal(Day09.part01(Utils.loadInput(9)), 5513, "Fail")
+  t->equal(Day09.part02(Utils.loadInput(9)), 2427, "Fail")
 })

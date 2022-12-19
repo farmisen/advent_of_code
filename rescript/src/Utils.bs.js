@@ -59,7 +59,7 @@ function first(arr) {
 function last(arr) {
   var match = arr.length;
   if (match !== 0) {
-    return Caml_array.get(arr, arr.length);
+    return Caml_array.get(arr, arr.length - 1 | 0);
   }
   throw {
         RE_EXN_ID: WentSouth,
