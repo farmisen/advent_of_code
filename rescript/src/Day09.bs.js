@@ -29,14 +29,6 @@ function sign(n) {
   }
 }
 
-function abs(n) {
-  if (n < 0) {
-    return -n | 0;
-  } else {
-    return n;
-  }
-}
-
 function loadMoves(input) {
   return Js_array.map((function (tokens) {
                 var count = Belt_Option.getExn(Belt_Int.fromString(Caml_array.get(tokens, 1)));
@@ -86,8 +78,8 @@ function updateRope(move, state) {
             var prev = Utils.last(knots);
             var dx = prev.x - knot.x | 0;
             var dy = prev.y - knot.y | 0;
-            var match$1 = abs(dx);
-            var match$2 = abs(dy);
+            var match$1 = Math.abs(dx);
+            var match$2 = Math.abs(dy);
             var exit = 0;
             if (match$1 <= 1 && match$2 <= 1) {
               newKnot = knot;
@@ -193,7 +185,6 @@ function part02(input) {
 export {
   makeRope ,
   sign ,
-  abs ,
   loadMoves ,
   updateRope ,
   simulate ,

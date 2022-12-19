@@ -38,6 +38,15 @@ function mapRange(from, to, apply) {
   return ary;
 }
 
+function abs(a) {
+  var match = a < 0;
+  if (match) {
+    return -a | 0;
+  } else {
+    return a;
+  }
+}
+
 function unwrapOrRaise(exp, a) {
   if (a !== undefined) {
     return Caml_option.valFromOption(a);
@@ -124,6 +133,7 @@ export {
   loadInput ,
   sortNumbers ,
   mapRange ,
+  abs ,
   unwrapOrRaise ,
   first ,
   last ,

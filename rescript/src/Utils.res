@@ -13,7 +13,7 @@ let loadInput = (day: int) => {
 
 let sortNumbers = sortInPlaceWith((a, b) => a - b)
 
-let mapRange = (from: int, to: int, apply: int => 'a): array<'a> => {
+let mapRange = (from: int, to: int, apply: int => 'a): array<'a> =>
   switch (from, to) {
   | (_, _) if to < from => []
   | _ => {
@@ -24,32 +24,30 @@ let mapRange = (from: int, to: int, apply: int => 'a): array<'a> => {
       ary
     }
   }
-}
 
+let abs = (a: int): int =>
+  switch a < 0 {
+  | true => -a
+  | _ => a
+  }
 
-
-
-
-let unwrapOrRaise = (exp, a) => {
+let unwrapOrRaise = (exp, a) =>
   switch a {
   | Some(thing) => thing
   | None => raise(exp)
   }
-}
 
-let first = (arr: array<'a>): 'a => {
+let first = (arr: array<'a>): 'a =>
   switch length(arr) {
   | 0 => raise(WentSouth)
   | _ => arr[0]
   }
-}
 
-let last = (arr: array<'a>): 'a => {
+let last = (arr: array<'a>): 'a =>
   switch length(arr) {
   | 0 => raise(WentSouth)
-  | _ => arr[length(arr)-1]
+  | _ => arr[length(arr) - 1]
   }
-}
 
 let loadLines = (day: int) => day |> loadInput |> Js.String.split(Os.eol)
 
@@ -72,12 +70,12 @@ let sortArrayWith = (with: (int, int) => int, arr: array<'a>): array<'a> => {
   arr
 }
 
-let sliceArrayAt = (idx: int, arr: array<'a>): (array<'a>, array<'a>) => {
-  (slice(~start=0, ~end_=idx, arr), sliceFrom(idx, arr))
-}
+let sliceArrayAt = (idx: int, arr: array<'a>): (array<'a>, array<'a>) => (
+  slice(~start=0, ~end_=idx, arr),
+  sliceFrom(idx, arr),
+)
 
-let toChunks = (size, arr) => {
-  arr |> reducei((accumulator, item, index) => {
+let toChunks = (size, arr) => arr |> reducei((accumulator, item, index) => {
     let chunk = if mod(index, size) === 0 {
       []
     } else {
@@ -85,7 +83,6 @@ let toChunks = (size, arr) => {
     }
     item |> pushTo(chunk) |> pushTo(accumulator)
   }, [])
-}
 
 let arrayOfSize = (size: int, valueAt: int => 'a): array<'a> => {
   let arr = []

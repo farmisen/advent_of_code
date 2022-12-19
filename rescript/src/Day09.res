@@ -30,12 +30,6 @@ let sign = (n: int): int =>
   | _ => 1
   }
 
-let abs = (n: int): int =>
-  switch n {
-  | _ if n < 0 => -n
-  | _ => n
-  }
-
 let loadMoves = input =>
   input
   |> split(NodeJs.Os.eol)
@@ -62,7 +56,7 @@ let updateRope = (move: move, state: state): state => {
         let dx = prev.x - knot.x
         let dy = prev.y - knot.y
 
-        switch (abs(dx), abs(dy)) {
+        switch (Js.Math.abs_int(dx), Js.Math.abs_int(dy)) {
         | (s, t) if s <= 1 && t <= 1 => knot
         | (0, 2) => {...knot, y: knot.y + sign(dy)}
         | (2, 0) => {...knot, x: knot.x + sign(dx)}
