@@ -35,7 +35,7 @@ where
     lines("day_05", LINE_END).iter().for_each(|line| {
         if line.contains('[') {
             line.chars().enumerate().for_each(|(idx, c)| {
-                if ('A'..='Z').contains(&c) {
+                if c.is_ascii_uppercase() {
                     stacks[(idx - 1) / 4].push(c);
                 }
             });

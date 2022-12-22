@@ -17,15 +17,16 @@ pub fn datapath(puzzle: &str) -> Result<PathBuf> {
     path.push("puzzles");
     path.push(puzzle);
     path.push("input.txt");
+
     Ok(path)
 }
 
 pub fn lines(puzzle: &str, splitter: &str) -> Vec<String> {
-    fs::read_to_string(datapath(puzzle).unwrap())
-        .unwrap()
-        .split(splitter)
-        .map(str::to_string)
-        .collect()
+    input(puzzle).split(splitter).map(str::to_string).collect()
+}
+
+pub fn input(puzzle: &str) -> String {
+    fs::read_to_string(datapath(puzzle).unwrap()).unwrap()
 }
 
 pub mod day01;
@@ -33,6 +34,7 @@ pub mod day02;
 pub mod day03;
 pub mod day04;
 pub mod day05;
+pub mod day11;
 
 pub fn run_all() {
     day01::part01();
@@ -45,4 +47,6 @@ pub fn run_all() {
     day04::part02();
     day05::part01();
     day05::part02();
+
+    day11::part01(input("day_11").as_str());
 }
