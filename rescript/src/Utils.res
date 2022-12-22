@@ -60,12 +60,13 @@ let unshiftArray = (arr: array<'a>, item: 'a): array<'a> => {
   unshift(item, arr)->ignore
   arr
 }
+
 let reverseArray = (arr: array<'a>): array<'a> => {
   reverseInPlace(arr)->ignore
   arr
 }
 
-let sortArrayWith = (with: (int, int) => int, arr: array<'a>): array<'a> => {
+let sortArrayWith = (with: ('a, 'a) => int, arr: array<'a>): array<'a> => {
   sortInPlaceWith(with, arr)->ignore
   arr
 }
