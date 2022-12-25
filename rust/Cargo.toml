@@ -9,6 +9,7 @@ tuple = "0.5.1"
 itertools = "0.10.5"
 regex = "1.7.0"
 pathfinding = "4.1.1"
+nom = "7.1.1"
 
 [dev-dependencies]
 criterion = "0.4.0"

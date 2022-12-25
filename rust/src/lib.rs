@@ -36,6 +36,8 @@ pub mod day04;
 pub mod day05;
 pub mod day11;
 pub mod day12;
+pub mod day13;
+pub mod nom13;
 
 pub fn run_all() {
     day01::part01();
