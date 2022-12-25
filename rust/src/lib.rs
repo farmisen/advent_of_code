@@ -29,6 +29,28 @@ pub fn input(puzzle: &str) -> String {
     fs::read_to_string(datapath(puzzle).unwrap()).unwrap()
 }
 
+trait ReturnOneLiners<T> {
+    fn push_and_ret(self, item: T) -> Self;
+    fn extend_and_ret(self, item: Vec<T>) -> Self;
+}
+
+impl<T> ReturnOneLiners<T> for Vec<T> {
+    #[inline]
+    fn push_and_ret(mut self, item: T) -> Self {
+        self.push(item);
+        self
+    }
+
+    fn extend_and_ret(mut self, item: Self) -> Self {
+        self.extend(item);
+        self
+    }
+}
+
+
+
+
+
 pub mod day01;
 pub mod day02;
 pub mod day03;
@@ -38,6 +60,7 @@ pub mod day11;
 pub mod day12;
 pub mod day13;
 pub mod nom13;
+pub mod day14;
 
 pub fn run_all() {
     day01::part01();
