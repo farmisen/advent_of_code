@@ -47,9 +47,39 @@ impl<T> ReturnOneLiners<T> for Vec<T> {
     }
 }
 
+pub trait LineSplitting {
+    fn trimmed_lines(&self) -> LinesIterator;
+}
 
+impl LineSplitting for &str {
+    fn trimmed_lines(&self) -> LinesIterator {
+        LinesIterator { string: self }
+    }
+}
+pub struct LinesIterator<'a> {
+    string: &'a str,
+}
 
+impl<'a> Iterator for LinesIterator<'a> {
+    type Item = &'a str;
 
+    fn next(&mut self) -> Option<Self::Item> {
+        match self.string.is_empty() {
+            true => None,
+            _ => match self.string.split_once(LINE_END) {
+                Some((str1, str2)) => {
+                    self.string = str2;
+                    Some(str1.trim())
+                }
+                None => {
+                    let res = Some(self.string.trim());
+                    self.string = "";
+                    res
+                }
+            },
+        }
+    }
+}
 
 pub mod day01;
 pub mod day02;
@@ -57,10 +87,11 @@ pub mod day03;
 pub mod day04;
 pub mod day05;
 pub mod day11;
-pub mod day12;
-pub mod day13;
-pub mod nom13;
-pub mod day14;
+// pub mod day12;
+// pub mod day13;
+// pub mod nom13;
+// pub mod day14;
+pub mod day18;
 
 pub fn run_all() {
     day01::part01();
