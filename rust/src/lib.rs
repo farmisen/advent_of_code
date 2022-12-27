@@ -87,23 +87,8 @@ pub mod day03;
 pub mod day04;
 pub mod day05;
 pub mod day11;
-// pub mod day12;
-// pub mod day13;
-// pub mod nom13;
+pub mod day12;
+pub mod day13;
+pub mod nom13;
 // pub mod day14;
 pub mod day18;
-
-pub fn run_all() {
-    day01::part01();
-    day01::part02();
-    day02::part01();
-    day02::part02();
-    day03::part01();
-    day03::part02();
-    day04::part01();
-    day04::part02();
-    day05::part01();
-    day05::part02();
-
-    day11::part01(input("day_11").as_str());
-}

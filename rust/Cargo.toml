@@ -12,7 +12,8 @@ pathfinding = "4.1.1"
 nom = "7.1.1"
 
 [dev-dependencies]
-criterion = "0.4.0"
+# criterion = "0.4.0"
+glassbench = "0.3"
 
 [[bench]]
 name = "my_benchmark"
