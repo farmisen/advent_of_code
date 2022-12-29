@@ -1,4 +1,5 @@
 #![feature(iter_array_chunks)]
+#![feature(slice_take)]
 
 use std::{env::current_dir, fs, io::Result, path::PathBuf};
 
@@ -31,7 +32,7 @@ pub fn input(puzzle: &str) -> String {
 
 trait ReturnOneLiners<T> {
     fn push_and_ret(self, item: T) -> Self;
-    fn extend_and_ret(self, item: Vec<T>) -> Self;
+    // fn extend_and_ret(self, item: Vec<T>) -> Self;
 }
 
 impl<T> ReturnOneLiners<T> for Vec<T> {
@@ -41,10 +42,10 @@ impl<T> ReturnOneLiners<T> for Vec<T> {
         self
     }
 
-    fn extend_and_ret(mut self, item: Self) -> Self {
-        self.extend(item);
-        self
-    }
+    // fn extend_and_ret(mut self, item: Self) -> Self {
+    //     self.extend(item);
+    //     self
+    // }
 }
 
 pub trait LineSplitting {
@@ -90,5 +91,6 @@ pub mod day11;
 pub mod day12;
 pub mod day13;
 pub mod day14;
+pub mod day15;
 pub mod day18;
 pub mod nom13;

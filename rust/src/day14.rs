@@ -105,9 +105,10 @@ where
     false
 }
 
-
-pub fn simulate<F>(input: &str, criteria: F) -> u64 where
-F: Fn(&Vec2, i64, &HashMap<Vec2, Unit>) -> bool, {
+pub fn simulate<F>(input: &str, criteria: F) -> u64
+where
+    F: Fn(&Vec2, i64, &HashMap<Vec2, Unit>) -> bool,
+{
     // parse the input into a HashMap<Pos, Unit> of units
     let mut units = parse_scan(input);
 
@@ -124,7 +125,6 @@ F: Fn(&Vec2, i64, &HashMap<Vec2, Unit>) -> bool, {
     }
     step
 }
-
 
 pub fn part01(input: &str) -> u64 {
     simulate(input, |pos, bottom, _| pos.1 == bottom)

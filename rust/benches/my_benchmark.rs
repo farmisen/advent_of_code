@@ -91,6 +91,17 @@ pub fn benchmark_day14(bench: &mut Bench) {
     });
 }
 
+pub fn benchmark_day15(bench: &mut Bench) {
+    let binding = input("day_15");
+    let input = binding.as_str();
+    bench.task("day 15 part 01", |task| {
+        task.iter(|| advent_of_code::day15::part01(input, 2000000))
+    });
+    bench.task("day 15 part 02", |task| {
+        task.iter(|| advent_of_code::day15::part02(input, 4000000))
+    });
+}
+
 pub fn benchmark_day18(bench: &mut Bench) {
     let binding = input("day_18");
     let input = binding.as_str();
@@ -112,6 +123,7 @@ glassbench!(
     benchmark_day11,
     benchmark_day12,
     benchmark_day13,
-    // benchmark_day14,
+    benchmark_day14,
+    benchmark_day15,
     benchmark_day18,
 );
