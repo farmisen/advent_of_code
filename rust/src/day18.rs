@@ -154,7 +154,6 @@ fn find_connected_voxels(
     collected
 }
 
-
 fn hole_at(voxel: &Voxel, extent: Extent, voxels: &HashSet<Voxel>) -> Option<HashSet<Voxel>> {
     let con = find_connected_voxels(voxel, extent, voxels);
     let over_extent = con.iter().any(|v| !extent.includes(v));
@@ -265,7 +264,7 @@ mod tests {
     }
 
     #[test]
-    fn day_18_larger_example_part2_3() {
+    fn day_18_part2_3() {
         assert_eq!(part02(input("day_18").as_str()), 2508);
     }
 }

@@ -1,94 +1,145 @@
-use std::collections::{HashMap, HashSet};
+use crate::LINE_END;
+use itertools::Itertools;
+use std::collections::HashMap;
 
-use crate::{ReturnOneLiners, EMPTY_LINE, LINE_END};
+#[derive(Debug, Eq, PartialEq, Clone, Copy, Hash)]
+pub struct Vec2(i64, i64);
 
-#[derive(Debug, PartialEq, Clone)]
-pub struct Pos(i64, i64);
-
-impl Pos {
-    pub fn path_to(&self, other: &Pos) -> Vec<Self> {
-        let &Pos(x_start, y_start) = self;
-        let Pos(x_end, y_end) = other;
-
-        let (dx, dy) = ((x_end - x_start).signum(), (y_end - y_start).signum());
-
-        (x_start..x_end + dx)
-            .step_by(dx)
-            .zip(y_start..y_end + dy)
-            .step_by(dy)
-            .map(|(x, y)| Pos(x, y))
-            .collect()
-
-        // let mut path = vec![];
-
-        // let (dx, dy) = ((x_end - x_start).signum(), (y_end - y_start).signum());
-        // let mut p = self.clone();
-        // loop {
-        //     p = Pos(p.0 + dx, p.1 + dy);
-        //     path.push(p.clone());
-        //     if p.eq(other) {
-        //         break;
-        //     }
-        // }
-
-        // path
+impl Vec2 {
+    pub fn path_to(&self, other: &Vec2) -> Vec<Self> {
+        let &Vec2(x0, y0) = self;
+        let Vec2(x1, y1) = other;
+        let mut path = vec![];
+        let (dx, dy) = ((x1 - x0).signum(), (y1 - y0).signum());
+        let mut p = *self;
+        loop {
+            p = Vec2(p.0 + dx, p.1 + dy);
+            path.push(p);
+            if p.eq(other) {
+                break;
+            }
+        }
+        path
     }
 }
 
-#[derive(Debug, PartialEq)]
-pub enum Unit {
-    Rock(Pos),
-    Sand(Pos),
+impl From<&str> for Vec2 {
+    fn from(value: &str) -> Self {
+        let digits: Vec<i64> = value
+            .splitn(2, ',')
+            .map(|s| s.trim().parse::<i64>().unwrap())
+            .collect();
+        Self(digits[0], digits[1])
+    }
 }
 
-pub fn parse_path(input: &str) -> Vec<Pos> {
+#[derive(Debug, Eq, PartialEq, Hash)]
+pub enum Unit {
+    Rock,
+    Sand,
+}
+
+pub fn parse_path(input: &str) -> Vec<Vec2> {
     input
         .split(" -> ")
-        .map(|token| token.split_once(',').unwrap())
-        .map(|(str_x, str_y)| Pos(str_x.parse::<i64>().unwrap(), str_y.parse::<i64>().unwrap()))
-        .fold(Vec::<Pos>::new(), |mut path, pos| {
-            println!("\nPATH:{path:?}, POS:{pos:?}");
-
-            let res = match path.iter().last() {
-                None => vec![pos.clone()],
+        .map(Vec2::from)
+        .fold(Vec::<Vec2>::new(), |mut path, vec2| {
+            match path.iter().last() {
+                None => vec![vec2],
                 Some(p) => {
-                    println!("P:{p:?}");
-                    let mut pt = p.path_to(&pos);
-                    println!("PT:{pt:?}");
+                    let mut pt = p.path_to(&vec2);
                     path.append(&mut pt);
-                    println!("AP:{path:?}");
                     path
                 }
-            };
-            println!("RES:{res:?}");
-            res
+            }
         })
 }
 
-pub fn parse_scan(input: &str) -> HashSet<Unit> {
-    let t = input
+pub fn parse_scan(input: &str) -> HashMap<Vec2, Unit> {
+    input
         .split(LINE_END)
         .filter(|l| !l.is_empty())
-        .collect::<Vec<_>>();
-
-    println!("{t:?}");
-
-    HashSet::new()
+        .flat_map(parse_path)
+        .map(|pos| (pos, Unit::Rock))
+        .collect::<HashMap<_, _>>()
 }
 
-pub fn part01(input: &str) -> u64 {
+pub fn simulate_step<F>(units: &mut HashMap<Vec2, Unit>, bottom: i64, criteria: &F) -> bool
+where
+    F: Fn(&Vec2, i64, &HashMap<Vec2, Unit>) -> bool,
+{
+    let mut pos = Vec2(500, 0);
+
+    let get_unit_at = |pos: &Vec2| -> Option<&Unit> {
+        match units.get(pos) {
+            Some(u) => Some(u),
+            None => match pos.1 {
+                y if y == bottom + 2 => Some(&Unit::Rock),
+                _ => None,
+            },
+        }
+    };
+
+    loop {
+        if criteria(&pos, bottom, units) {
+            return true;
+        }
+
+        let Vec2(x, y) = pos;
+        if let Some(p) = match get_unit_at(&Vec2(x, y + 1)) {
+            None => Some(Vec2(x, y + 1)),
+            Some(_) => match get_unit_at(&Vec2(x - 1, y + 1)) {
+                None => Some(Vec2(x - 1, y + 1)),
+                Some(_) => match get_unit_at(&Vec2(x + 1, y + 1)) {
+                    None => Some(Vec2(x + 1, y + 1)),
+                    Some(_) => None,
+                },
+            },
+        } {
+            pos = p;
+        } else {
+            units.insert(pos, Unit::Sand);
+            break;
+        }
+    }
+    false
+}
+
+
+pub fn simulate<F>(input: &str, criteria: F) -> u64 where
+F: Fn(&Vec2, i64, &HashMap<Vec2, Unit>) -> bool, {
     // parse the input into a HashMap<Pos, Unit> of units
-    parse_scan(input);
-    // figure out the rock boundary
+    let mut units = parse_scan(input);
 
+    // figure out the rocks bottom y
+    let bottom = units.keys().map(|p| p.1).sorted().last().unwrap();
+
+    let mut step = 0;
     // iterate until a unit of sand fall out the boundary
+    loop {
+        if simulate_step(&mut units, bottom, &criteria) {
+            break;
+        }
+        step += 1;
+    }
+    step
+}
 
-    0
+
+pub fn part01(input: &str) -> u64 {
+    simulate(input, |pos, bottom, _| pos.1 == bottom)
+}
+
+pub fn part02(input: &str) -> u64 {
+    simulate(input, |_, _, units| units.get(&Vec2(500, 0)).is_some())
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::day14::{parse_path, Pos};
+    use crate::{
+        day14::{parse_path, part01, part02, Vec2},
+        input,
+    };
 
     const PATH: &str = "498,4 -> 498,6 -> 496,6";
 
@@ -97,11 +148,11 @@ mod tests {
         assert_eq!(
             parse_path(PATH),
             vec![
-                Pos(498, 4),
-                Pos(498, 5),
-                Pos(498, 6),
-                Pos(497, 6),
-                Pos(496, 6)
+                Vec2(498, 4),
+                Vec2(498, 5),
+                Vec2(498, 6),
+                Vec2(497, 6),
+                Vec2(496, 6)
             ]
         );
     }
@@ -110,8 +161,23 @@ mod tests {
     498,4 -> 498,6 -> 496,6
     503,4 -> 502,4 -> 502,9 -> 494,9";
 
-    // #[test]
-    // fn day_14_part_01_example() {
-    //     assert_eq!(part01(SCAN), 24);
-    // }
+    #[test]
+    fn day_14_part_01_example() {
+        assert_eq!(part01(SCAN), 24);
+    }
+
+    #[test]
+    fn day_14_part_01() {
+        assert_eq!(part01(input("day_14").as_str()), 832);
+    }
+
+    #[test]
+    fn day_14_part_02_example() {
+        assert_eq!(part02(SCAN), 93);
+    }
+
+    #[test]
+    fn day_14_part_2() {
+        assert_eq!(part02(input("day_14").as_str()), 27601);
+    }
 }
