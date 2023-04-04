@@ -4,6 +4,7 @@
 ## Rust
 
 ```shell
+rustup use nightly
 cd rust
 cargo test
 ```
