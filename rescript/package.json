@@ -14,10 +14,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@dusty-phillips/rescript-zora": "^3.0.2",
+    "@dusty-phillips/rescript-zora": "^4.0.0",
     "onchange": "^7.1.0",
     "pta": "^1.2.0",
-    "rescript": "^10.0.1",
+    "rescript": "^10.1.4",
     "zora": "^5.2.0"
   },
   "dependencies": {
