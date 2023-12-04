@@ -3,7 +3,7 @@ package aockt.y2023
 import io.github.jadarma.aockt.test.AdventDay
 import io.github.jadarma.aockt.test.AdventSpec
 
-@AdventDay(2023, 3, "")
+@AdventDay(2023, 3, "Gear Ratios")
 class Y2023D03Test : AdventSpec<Y2023D03>({
 
     val longInput = """............830..743.......59..955.......663..........................................367...........895....899...............826...220......
