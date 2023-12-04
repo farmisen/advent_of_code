@@ -1,9 +1,9 @@
 package aockt.y2023
 
 import io.github.jadarma.aockt.core.Solution
-
+import com.kotlinspirit.core.Rules.char
+import com.kotlinspirit.core.Rules.int
 object Y2023D02 : Solution {
-    // Function to parse the input string into a sequence of pairs.
     // Each pair consists of an integer for the game id and a list of mutable maps for the game sets.
     private fun parseInput(input: String): Sequence<Pair<Int, List<MutableMap<String, Int>>>> =
         // Split the input string by newline characters and map each line.

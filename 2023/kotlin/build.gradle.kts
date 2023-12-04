@@ -23,6 +23,7 @@ sourceSets {
 
 repositories {
     mavenCentral()
+    maven { setUrl("https://jitpack.io") }
 }
 
 dependencies {
@@ -30,6 +31,7 @@ dependencies {
     val kotestVersion = "5.5.5"
 
     implementation("io.github.jadarma.aockt:aockt-core:$aocktVersion")
+    implementation("com.github.tiksem:KotlinSpirit:1.1.5")
     testImplementation("io.github.jadarma.aockt:aockt-test:$aocktVersion")
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 }
