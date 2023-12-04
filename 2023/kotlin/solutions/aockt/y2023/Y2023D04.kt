@@ -7,15 +7,11 @@ object Y2023D04 : Solution {
 
         companion object {
             fun of(input: String): Card {
-                val id = input.trim().substringAfter("Card").substringBefore(":").trim().toInt()
-                val (winningNbs, ownedNumbers) = input.substringAfter(":").split("|", limit = 2)
+                val id = input.substringAfter("Card").substringBefore(":").trim().toInt()
+                val (winningNumbers, cardNumbers) = input.substringAfter(":").split("|", limit = 2)
                     .map { numbers -> numbers.trim().split(Regex("\\s+")).map { it.toInt() } }
-                return Card(id, winningNbs, ownedNumbers)
+                return Card(id, winningNumbers, cardNumbers)
             }
-        }
-
-        override fun toString(): String {
-            return "$id:$winningNumbers|$cardNumbers"
         }
 
         private fun winnings() = winningNumbers.intersect(cardNumbers.toSet()).size
