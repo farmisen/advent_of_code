@@ -49,16 +49,16 @@ object Y2023D07 : Solution {
 
     private fun parseInput(input: String) = input.split("\n").map { Hand.of(it) }
 
-    fun makeCombinedComparator(order: Map<Char, Int>, withJoker: Boolean = false) =
+    private fun makeCombinedComparator(order: Map<Char, Int>, withJoker: Boolean = false) =
         compareBy<Hand> { it.type(withJoker) }.thenComparator { h1, h2 ->
-            h1.cards.zip(h2.cards).mapNotNull { (c1, c2) ->
+            h1.cards.zip(h2.cards).firstNotNullOfOrNull { (c1, c2) ->
                 val order1 = order[c1] ?: 0
                 val order2 = order[c2] ?: 0
                 if (order1 != order2) order1.compareTo(order2) else null
-            }.firstOrNull() ?: 0
+            } ?: 0
         }
 
-    override fun partOne(input: String): Long {
+    private fun getAnswer(input: String, withJoker: Boolean): Long {
         val cardRankOrder = mapOf(
             '2' to 2,
             '3' to 3,
@@ -69,33 +69,16 @@ object Y2023D07 : Solution {
             '8' to 8,
             '9' to 9,
             'T' to 10,
-            'J' to 11,
+            'J' to if (withJoker) 1 else 11,
             'Q' to 12,
             'K' to 13,
             'A' to 14,
         )
-        val combinedComparator = makeCombinedComparator(cardRankOrder)
+        val combinedComparator = makeCombinedComparator(cardRankOrder, withJoker)
         return parseInput(input).sortedWith(combinedComparator).mapIndexed { idx, hand -> (idx + 1) * hand.bid }.sum()
     }
 
-    override fun partTwo(input: String): Long {
-        val cardRankOrder = mapOf(
-            '2' to 2,
-            '3' to 3,
-            '4' to 4,
-            '5' to 5,
-            '6' to 6,
-            '7' to 7,
-            '8' to 8,
-            '9' to 9,
-            'T' to 10,
-            'J' to 1,
-            'Q' to 12,
-            'K' to 13,
-            'A' to 14,
-        )
+    override fun partOne(input: String) = getAnswer(input, false)
 
-        val combinedComparator = makeCombinedComparator(cardRankOrder, true)
-        return parseInput(input).sortedWith(combinedComparator).mapIndexed { idx, hand -> (idx + 1) * hand.bid }.sum()
-    }
+    override fun partTwo(input: String) = getAnswer(input, true)
 }
