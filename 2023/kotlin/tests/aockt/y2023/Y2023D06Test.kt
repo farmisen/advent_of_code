@@ -14,7 +14,6 @@ class Y2023D06Test : AdventSpec<Y2023D06>({
     }
 
     partTwo {
-
         input shouldOutput 71503
     }
 

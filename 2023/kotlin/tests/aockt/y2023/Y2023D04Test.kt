@@ -14,10 +14,6 @@ class Y2023D04Test : AdventSpec<Y2023D04>({
                     Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11"""
 
 
-    test("debug") {
-        solution.partOne(input)
-    }
-
     partOne {
         input shouldOutput 13
     }

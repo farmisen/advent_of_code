@@ -15,6 +15,10 @@ import io.github.jadarma.aockt.test.AdventSpec
 @AdventDay(9999, 1, "Magic Numbers")
 class Y9999D01Test : AdventSpec<Y9999D01>({
 
+    test("debug") {
+        solution.partOne("1,2,3")
+    }
+
     partOne {
         "1,2,3" shouldOutput 4
         listOf("0", "2,4,6,8", "2,2,2,2") shouldAllOutput 0
