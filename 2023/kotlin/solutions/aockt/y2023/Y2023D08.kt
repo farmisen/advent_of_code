@@ -24,13 +24,13 @@ object Y2023D08 : Solution {
         var totalSteps: Long = 0,
         var nextInstructionIdx: Int = 0
     ) {
-        fun step(): String {
-            totalSteps += 1
+        fun step() {
             val instruction = instructions.elementAt(nextInstructionIdx)
-            val currentNode = nodes.get(currentNodeId)
-            currentNodeId = if (instruction == 'L') currentNode!!.left else currentNode!!.right
+            val currentNode = nodes[currentNodeId]
+            require(currentNode != null)
+            currentNodeId = if (instruction == 'L') currentNode.left else currentNode.right
             nextInstructionIdx = (nextInstructionIdx + 1) % instructions.size
-            return currentNodeId
+            totalSteps += 1
         }
     }
 
