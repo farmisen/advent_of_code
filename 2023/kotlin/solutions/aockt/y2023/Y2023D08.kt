@@ -34,14 +34,6 @@ object Y2023D08 : Solution {
         }
     }
 
-    private fun parseInput(input: String): Pair<List<Char>, Map<String, Node>> {
-        val instructions = input.substringBefore("\n").trim().toCharArray().toList()
-        val nodes = input.substringAfter("\n\n").split("\n").map { Node.of(it) }.groupBy { it.id }
-            .mapValues { (_, list) -> list.single() }
-        return Pair(instructions, nodes)
-    }
-
-
     private fun gcd(a: Long, b: Long): Long {
         if (b == 0L) return a
         return gcd(b, a % b)
@@ -49,6 +41,13 @@ object Y2023D08 : Solution {
 
     private fun lcm(a: Long, b: Long): Long {
         return a * (b / gcd(a, b))
+    }
+
+    private fun parseInput(input: String): Pair<List<Char>, Map<String, Node>> {
+        val instructions = input.substringBefore("\n").trim().toCharArray().toList()
+        val nodes = input.substringAfter("\n\n").split("\n").map { Node.of(it) }.groupBy { it.id }
+            .mapValues { (_, list) -> list.single() }
+        return Pair(instructions, nodes)
     }
 
     override fun partOne(input: String): Long {
@@ -87,4 +86,3 @@ object Y2023D08 : Solution {
         return distances.reduce { a, b -> lcm(a, b) }
     }
 }
-
